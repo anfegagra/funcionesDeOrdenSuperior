@@ -25,7 +25,7 @@ public class Main implements InterfaceSuma {
 		// Interfaz funcional Function<T, R>
 		/*
 		interface Function<T t, R r> {
-			R apply(T, t)
+			R apply(t)
 		 */
 		Function<String, String> convertirAMayusculas = nombre -> nombre.toUpperCase();
 		main.imprimirNombreEnMayusculaConFunction(convertirAMayusculas, "pipe");
@@ -33,7 +33,7 @@ public class Main implements InterfaceSuma {
 		// Interfaz funciona BiFunction<T, U, R>
 		/*
 		interface BiFunction<T, U, R> {
-			R apply(T t, U u)
+			R apply(t, u)
 		 */
 
 		// Interfaz funcional Predicate<T>
