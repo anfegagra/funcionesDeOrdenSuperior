@@ -3,6 +3,7 @@ package main.java;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class Main implements InterfaceSuma {
 		Function<String, String> convertirAMayusculas = nombre -> nombre.toUpperCase();
 		main.imprimirNombreEnMayusculaConFunction(convertirAMayusculas, "pipe");
 
-		// Interfaz funciona BiFunction<T, U, R>
+		// Interfaz funcional BiFunction<T, U, R>
 		/*
 		interface BiFunction<T, U, R> {
 			R apply(t, u)
@@ -46,6 +47,16 @@ public class Main implements InterfaceSuma {
 		List<Integer> listaNumeros = Arrays.asList(1, 4, -7, 10, -5, 90);
 		System.out.println("Lista obtenida con BiFunction<T, U, R> y Predicate<T>: " +
 			filtrar.apply(listaNumeros, numero -> numero > 0));
+
+		// Interfaz funcional Consumer<T>
+		/*
+		interface Consumer<T t> {
+			void accept(t)
+		 */
+		List<String> listaNombres = Arrays.asList("Santiago", "Pipe", "Laura");
+		main.filtrarNombres(listaNombres, 6,
+			nombres ->
+				System.out.println("Nombre obtenido con Predicate<T> y Consumer<T>: " + nombres));
 	}
 
 	public int sumar(int a, int b) {
@@ -63,6 +74,16 @@ public class Main implements InterfaceSuma {
 
 	public void imprimirNombreEnMayusculaConFunction(Function<String, String> funcion,
 		String nombre) {
-		System.out.println("Function<T, R>: " + funcion.apply(nombre));
+		System.out.println(
+			"Nombre convertido en mayúscula utilizando Function<T, R>: " + funcion.apply(nombre));
+	}
+
+	public void filtrarNombres(List<String> listaNombres, int maximoCaracteres,
+		Consumer<String> consumer) {
+		listaNombres.stream().filter(logicaPredicado(maximoCaracteres)).forEach(consumer);
+	}
+
+	public Predicate<String> logicaPredicado(int maximoCaracteres) {
+		return nombre -> nombre.length() < maximoCaracteres;
 	}
 }
